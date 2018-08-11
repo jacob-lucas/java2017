@@ -9,7 +9,7 @@ public class Day1 {
 
     // find the sum of all digits that match the next digit in the list.
     // the list is circular, so the digit after the last digit is the first digit in the list.
-    int matchingDigitSum(String input) {
+    int matchingDigitSum(String input, int nextPos) {
         if (input.length() == 0) {
             return 0;
         }
@@ -21,10 +21,7 @@ public class Day1 {
 
         int sum = 0;
         for (int i = 0; i < input.length(); i++) {
-            int next = i + 1;
-            if (next == input.length()) {
-                next = 0;
-            }
+            int next = (i + nextPos) % input.length();
 
             int a = ints.get(i);
             int b = ints.get(next);
@@ -41,7 +38,8 @@ public class Day1 {
                 .read("day1.txt")
                 .get(0);
 
-        System.out.println(new Day1().matchingDigitSum(input));
+        System.out.println(new Day1().matchingDigitSum(input, 1));
+        System.out.println(new Day1().matchingDigitSum(input, input.length() / 2));
     }
 
 }
